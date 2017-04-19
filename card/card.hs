@@ -1,8 +1,18 @@
-evens = if  (x % 2 == 0) then x * 2 else x
+cardNumber :: [Integer]
+cardNumber = [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
-cardNumber = [4,1,9,4,6,5,2,6,9,8,2,7,2,1,9]
+doubleOtherNumber :: [Integer] -> [Integer]
+doubleOtherNumber = zipWith ($) (cycle [id, (*2)])
 
-cardNumberMulti = [x * 2 | x <- cardNumber]
+cardNumberFinal :: [Integer]
+cardNumberFinal = reverse (doubleOtherNumber (reverse cardNumber))
 
-checksum = sum cardNumberMulti 
+checksum :: Integer
+checksum = sum cardNumberFinal
+
+remainingZero :: Integral a => a -> Bool
+remainingZero n = n `div` 100 == 0
+
+validate :: Integer -> Bool
+validate n = if remainingZero n then True else False
 
